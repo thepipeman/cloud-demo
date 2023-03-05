@@ -6,9 +6,20 @@ services:
     container_name: external-service
     ports:
       - 9502:9502
+  demo-client:
+    image: demo/client:0.0.1-SNAPSHOT
+    container_name: demo-client
+    ports:
+      - 9501:9501
+    depends_on:
+      external-service:
+        condition: service_started
+    environment:
+      - INTEGRATION_DEMO_ROOT_URI=http://external-service:9502/api
+      - INTEGRATION_DEMO_MESSAGE=HELLO FROM COMPOSE
 #    networks:
 #      - backend
-#
+
 #networks:
 #  backend:
 #    driver: bridge

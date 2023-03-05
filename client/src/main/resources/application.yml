@@ -1,0 +1,10 @@
+server:
+  port: 9501
+  servlet:
+    context-path: /api
+
+
+integration:
+  demo:
+    root-uri: http://container_name:9502/api
+    message: Hello from local service
