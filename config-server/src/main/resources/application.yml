@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/thepipeman/one-config
+          uri: https://github.com/thepipeman/cloud-demo-configuration
           skip-ssl-validation: true
 
 
