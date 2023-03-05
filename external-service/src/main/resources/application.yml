@@ -1,0 +1,8 @@
+server:
+  port: 9502
+  servlet:
+    context-path: /api
+
+demo:
+  external:
+    message: Hello from external service!
