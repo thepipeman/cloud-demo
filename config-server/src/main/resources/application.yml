@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: demo-config-server
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/thepipeman/one-config
+          skip-ssl-validation: true
+
+
+server:
+  port: 9500
+  servlet:
+    context-path: /api

@@ -1,3 +1,7 @@
+spring:
+  application:
+    name: demo-external-service
+
 server:
   port: 9502
   servlet:
