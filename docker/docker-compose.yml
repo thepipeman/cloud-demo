@@ -1,22 +1,43 @@
 version: '3.9'
 
 services:
-  external-service:
-    image: demo/external-service:0.0.1-SNAPSHOT
-    container_name: external-service
+  config-server:
+    image: demo/config-server:0.0.1-SNAPSHOT
+    container_name: config-service
     ports:
-      - 9502:9502
+      - 9500:9500
+
   demo-client:
     image: demo/client:0.0.1-SNAPSHOT
     container_name: demo-client
     ports:
       - 9501:9501
     depends_on:
-      external-service:
+      config-server:
         condition: service_started
     environment:
-      - INTEGRATION_DEMO_ROOT_URI=http://external-service:9502/api
-      - INTEGRATION_DEMO_MESSAGE=HELLO FROM COMPOSE
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:9500/api
+      - SPRING_ACTIVE_PROFILES=dev
+
+
+    #---- compose without config server
+
+#  external-service:
+#    image: demo/external-service:0.0.1-SNAPSHOT
+#    container_name: external-service
+#    ports:
+#      - 9502:9502
+#  demo-client:
+#    image: demo/client:0.0.1-SNAPSHOT
+#    container_name: demo-client
+#    ports:
+#      - 9501:9501
+#    depends_on:
+#      external-service:
+#        condition: service_started
+#    environment:
+#      - INTEGRATION_DEMO_ROOT_URI=http://external-service:9502/api
+#      - INTEGRATION_DEMO_MESSAGE=HELLO FROM COMPOSE
 #    networks:
 #      - backend
 
