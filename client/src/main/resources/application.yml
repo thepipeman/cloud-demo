@@ -3,10 +3,14 @@ spring:
     name: demo-client
 
   config:
-    import: optional:configserver:http://localhost:9500/api
-#  cloud:
-#    config:
-#      name: demo-client
+    import: optional:configserver:http://172.17.0.1:9500/api
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        initial-interval: 1000
+        max-interval: 2000
+        max-attempts: 20
 
 server:
   port: 9501

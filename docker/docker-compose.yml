@@ -7,6 +7,13 @@ services:
     ports:
       - 9500:9500
 
+
+  external-service:
+    image: demo/external-service:0.0.1-SNAPSHOT
+    container_name: external-service
+    ports:
+      - 9502:9502
+
   demo-client:
     image: demo/client:0.0.1-SNAPSHOT
     container_name: demo-client
@@ -15,9 +22,11 @@ services:
     depends_on:
       config-server:
         condition: service_started
+      external-service:
+        condition: service_started
     environment:
       - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:9500/api
-      - SPRING_ACTIVE_PROFILES=dev
+      - SPRING_ACTIVE_PROFILES=a
 
 
     #---- compose without config server
