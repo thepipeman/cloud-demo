@@ -26,7 +26,7 @@ services:
         condition: service_started
     environment:
       - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:9500/api
-      - SPRING_ACTIVE_PROFILES=a
+      - SPRING_PROFILES_ACTIVE=a
 
 
     #---- compose without config server
